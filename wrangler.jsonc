@@ -6,13 +6,13 @@
   "compatibility_date": "2026-08-24",
   "triggers": {
     "crons": [
-      "0 5 * * *"
+      "0 5 * * *",
+      "0 16 * * *"
     ]
   },
   "observability": {
     "enabled": true,
     "head_sampling_rate": 1,
-    "redact_query_string": false,
     "logs": {
       "enabled": true,
       "head_sampling_rate": 1,
