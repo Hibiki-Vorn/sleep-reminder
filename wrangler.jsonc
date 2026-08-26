@@ -10,6 +10,15 @@
       "0 16 * * *"
     ]
   },
+  
+  "kv_namespaces": [
+    {
+      "binding": "KV",
+      "id": "d19ddce969e549f6b92c48e1ed6d0812",
+      "remote": true
+    }
+  ],
+  
   "observability": {
     "enabled": true,
     "head_sampling_rate": 1,

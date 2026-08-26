@@ -1,15 +1,15 @@
 import html from "./mail-text";
 
-const send = async (target, timeZone) => {
+const send = async (target, timeZone, dotenv) => {
 
     const res = await fetch("https://api.deomail.com/v1/send", {
       method: "POST",
       headers: {
-        "X-API-Key": "deo_live_GBcAeikcxRBVuORVK41mltpqA8oWBkdH",
+        "X-API-Key": dotenv.DEOMAIL_API_KEY,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "no-reply@hieronymus.uk",
+        from: dotenv.DEOMAIL_ADDRESS,
         to: [target],
         subject: "Warning for sleeping",
         html: html(timeZone),
@@ -23,24 +23,25 @@ const send = async (target, timeZone) => {
 
 export default {
   async fetch(request, env, ctx) {
-    return await send("hiernymus@proton.me")
-  },
-
-  async scheduled(controller, env, ctx) {
 
     let timeZone = "Asia/Singapore"
     let target = "hiernymus@proton.me"
 
-    if (controller.cron = "0 5 * * *") {
-        timeZone = "America/Chicago"
-        target = "podyqt@gmail.com"
-    }
+    return await send(target, timeZone, env)
+  },
 
-    if (controller.cron = "0 16 * * *") {
-        timeZone = "Asia/Singapore"
-        target = "hiernymus@proton.me"
-    }
+  async scheduled(controller, env, ctx) {
 
-    return await send(target, timeZone)
+    const userValueString = await env.KV.get(controller.cron)
+    const userValue = JSON.parse(userValueString)
+
+
+    const timeZone = userValue[0]
+    const target = userValue[1]
+
+    console.log("env.DEOMAIL_API_KEY")
+    console.log(env.DEOMAIL_API_KEY)
+
+    return await send(target, timeZone, env)
   }
 };
