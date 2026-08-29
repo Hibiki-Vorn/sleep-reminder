@@ -473,7 +473,7 @@ Get some rest early.
     "
 >
 
-${getTime(timeZone)}
+${getTimeUntil("00:00:00", timeZone)}
 
 </td>
 
@@ -600,7 +600,7 @@ Time until bedtime
     "
 >
 
-${getTimeUntil("00:00:00", timeZone)}
+${getTime(timeZone)}
 
 </td>
 
